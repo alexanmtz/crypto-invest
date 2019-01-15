@@ -60,7 +60,7 @@ class Content extends React.Component {
       console.log(error);
     });
 
-    axios.get('https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2015-01-01&end_date=2019-05-05&pair=BRLBTC&type=buy&page_size=100&current_page=1',
+    axios.get('https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2019-05-05&pair=BRLBTC&type=buy&page_size=100&current_page=1',
       {
         headers: {
           'Authorization': process.env.REACT_APP_API_TOKEN,
@@ -95,10 +95,11 @@ class Content extends React.Component {
                         <EventIcon className={classes.block} color="inherit" />
                       </Grid>
                       <Grid item xs>
-                        <Moment>
+                        <Moment format="DD/MM/YYYY HH:MM">
                           {order.create_date}
                         </Moment>
                         <small>
+                        {' '}
                         (<Moment fromNow>
                           {order.create_date}
                         </Moment>)
