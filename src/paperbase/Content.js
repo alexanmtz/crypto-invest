@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router';
 import EventIcon from '@material-ui/icons/Event';
 import MoneyIcon from '@material-ui/icons/MonetizationOn';
 import RefreshIcon from '@material-ui/icons/Refresh';
@@ -49,9 +50,12 @@ class Content extends React.Component {
     data: {},
     orders: []
   }
-  
   componentDidMount() {
-    axios.get('https://api.bitcointrade.com.br/v2/public/BRLBTC/ticker')
+    this.makeRequest();
+  }
+
+  makeRequest() {
+    axios.get(`https://api.bitcointrade.com.br/v2/public/${this.props.currency}/ticker`)
     .then((response) => {
       console.log(response);
       this.setState({data: response.data.data})
@@ -60,7 +64,7 @@ class Content extends React.Component {
       console.log(error);
     });
 
-    axios.get('https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2019-05-05&pair=BRLBTC&type=buy&page_size=100&current_page=1',
+    axios.get(`https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2019-05-05&pair=${this.props.currency}&type=buy&page_size=100&current_page=1`,
       {
         headers: {
           'Authorization': process.env.REACT_APP_API_TOKEN,
@@ -75,7 +79,6 @@ class Content extends React.Component {
     .catch(error => {
       console.log(error);
     });
-
   }
 
   render() {
@@ -133,13 +136,13 @@ class Content extends React.Component {
                 <div className={classes.contentWrapper}>
                   <div style={{margin: '20px 0', textAlign: 'center'}}>
                     <Typography color="textSecondary" align="center" gutterBottom>
-                      Valor do Bitcoin Hoje:
+                      Valor da moeda Hoje:
                     </Typography>
                     <Chip label={<NumberFormat value={this.state.data.buy} displayType={'text'} thousandSeparator={true} prefix={'R$'} />} />
                   </div>
                   <div style={{margin: '20px 0', textAlign: 'center'}}>
                     <Typography color="textSecondary" align="center" gutterBottom>
-                      Valor do Bitcoin quando você comprou
+                      Valor da moeda quando você comprou
                     </Typography>
                     <Chip label={<NumberFormat value={order.unit_price} displayType={'text'} thousandSeparator={true} prefix={'R$'} />} />
                   </div>
@@ -172,4 +175,4 @@ Content.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Content);
+export default withRouter(withStyles(styles)(Content));

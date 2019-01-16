@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Switch } from 'react-router'
+import { HashRouter, Route } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
@@ -177,12 +179,19 @@ class Paperbase extends React.Component {
               <Navigator PaperProps={{ style: { width: drawerWidth } }} />
             </Hidden>
           </nav>
+          <HashRouter>
           <div className={classes.appContent}>
             <Header onDrawerToggle={this.handleDrawerToggle} />
             <main className={classes.mainContent}>
-              <Content />
+                <Switch>
+                  <Route path="/BRLBTC" component={() => <Content currency='BRLBTC' />} />
+                  <Route path="/BRLETH" component={() => <Content currency='BRLETH' />} />
+                  <Route path="/BRLLTC" component={() => <Content currency='BRLLTC' />} />
+                  <Route path="/BRLBCH" component={() => <Content currency='BRLBCH' />} />
+                </Switch>
             </main>
           </div>
+          </HashRouter>
         </div>
       </MuiThemeProvider>
     );
