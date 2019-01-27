@@ -150,7 +150,7 @@ class Content extends React.Component {
                     Rendimento agora
                   </Typography>
                   {diff(order.unit_price) > 0 ? (
-                    <Typography color="default" align="center">
+                    <Typography color="primary" variant="display1" align="center">
                       <Mood />
                       <span>{diff(order.unit_price)}% </span>
                     </Typography> 
