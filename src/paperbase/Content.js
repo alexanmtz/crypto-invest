@@ -64,7 +64,7 @@ class Content extends React.Component {
       console.log(error);
     });
 
-    axios.get(`https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2019-05-05&pair=${this.props.currency}&type=buy&page_size=100&current_page=1`,
+    axios.get(`https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2019-12-12&pair=${this.props.currency}&type=buy&page_size=100&current_page=1`,
       {
         headers: {
           'Authorization': process.env.REACT_APP_API_TOKEN,
