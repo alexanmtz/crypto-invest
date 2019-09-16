@@ -19,6 +19,8 @@ import TimerIcon from '@material-ui/icons/Timer';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 
+const logo = require('../images/logo-dark.png')
+
 const categories = [
   {
     id: 'Develop',
@@ -93,7 +95,9 @@ function Navigator(props) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem className={classNames(classes.firebase, classes.item, classes.itemCategory)}>
-          Crypto Invest
+          <a href="/">
+            <img src={logo} width={220} />
+          </a>
         </ListItem>
         <ListItem className={classNames(classes.item, classes.itemCategory)}>
           <ListItemIcon>
