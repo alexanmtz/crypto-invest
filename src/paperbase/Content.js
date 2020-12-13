@@ -55,7 +55,7 @@ class Content extends React.Component {
   }
 
   makeRequest() {
-    axios.get(`https://api.bitcointrade.com.br/v2/public/${this.props.currency}/ticker`)
+    axios.get(`https://api.bitcointrade.com.br/v3/public/${this.props.currency}/ticker`)
     .then((response) => {
       console.log(response);
       this.setState({data: response.data.data})
@@ -64,7 +64,7 @@ class Content extends React.Component {
       console.log(error);
     });
 
-    axios.get(`https://api.bitcointrade.com.br/v2/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2020-10-10&pair=${this.props.currency}&type=buy&page_size=100&current_page=1`,
+    axios.get(`https://api.bitcointrade.com.br/v3/market/user_orders/list?status=executed_completely&start_date=2019-01-01&end_date=2020-10-10&pair=${this.props.currency}&type=buy&page_size=100&current_page=1`,
       {
         headers: {
           'Authorization': process.env.REACT_APP_API_TOKEN,
@@ -77,7 +77,7 @@ class Content extends React.Component {
       this.setState({orders: response.data.data.orders})
     })
     .catch(error => {
-      console.log(error);
+      console.log('error', error);
     });
   }
 
